@@ -17,9 +17,50 @@ namespace bloggr.Services
             return _repo.GetPublic();
         }
 
-        internal object Create(Blog newBlog)
+        internal Blog Create(Blog newBlog)
         {
-            return newBlog;
+            return _repo.Create(newBlog);
+        }
+
+        internal IEnumerable<Blog> GetUserBlogs(string userId)
+        {
+            return _repo.GetUserBlogs(userId);
+        }
+
+        internal Blog Get(int id)
+        {
+            Blog found = _repo.Get(id);
+            if (found == null)
+            {
+                throw new Exception("Invalid Id");
+            }
+            return found;
+        }
+
+        internal Blog Edit(Blog updatedBlog)
+        {
+            Blog found = Get(updatedBlog.Id);
+            if (found.AuthorId != updatedBlog.AuthorId)
+            {
+                throw new Exception("Invalid Request");
+            }
+            found.Title = updatedBlog.Title;
+            found.Body = updatedBlog.Body != null ? updatedBlog.Body : found.Body;
+            return _repo.Edit(found);
+        }
+
+        internal Blog Delete(int id, string userId)
+        {
+            Blog found = Get(id);
+            if (found.AuthorId != userId)
+            {
+                throw new Exception("Invalid Request");
+            }
+            if (_repo.Delete(id))
+            {
+                return found;
+            }
+            throw new Exception("Something went terribly wrong");
         }
     }
 }

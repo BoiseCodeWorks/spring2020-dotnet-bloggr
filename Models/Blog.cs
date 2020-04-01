@@ -4,7 +4,7 @@ namespace bloggr.Models
 {
     public class Blog
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required]
         [MaxLength(20)]
         public string Title { get; set; }

@@ -19,5 +19,49 @@ namespace bloggr.Repositories
             string sql = "SELECT * FROM blogs WHERE isPrivate = 0";
             return _db.Query<Blog>(sql);
         }
+
+        internal Blog Create(Blog newBlog)
+        {
+            string sql = @"
+            INSERT INTO blogs 
+            (title, body, authorId, isPrivate) 
+            VALUES 
+            (@Title, @Body, @AuthorId, @IsPrivate);
+            SELECT LAST_INSERT_ID()";
+            newBlog.Id = _db.ExecuteScalar<int>(sql, newBlog);
+            return newBlog;
+        }
+
+        internal Blog Get(int Id)
+        {
+            string sql = "SELECT * FROM blogs WHERE id = @Id";
+            return _db.QueryFirstOrDefault<Blog>(sql, new { Id });
+        }
+
+        internal IEnumerable<Blog> GetUserBlogs(string UserId)
+        {
+            string sql = "SELECT * FROM blogs WHERE authorId = @UserId";
+            return _db.Query<Blog>(sql, new { UserId });
+        }
+
+        internal Blog Edit(Blog updatedBlog)
+        {
+            string sql = @"
+            UPDATE blogs
+            SET
+                title = @Title,
+                body = @Body
+            WHERE id = @id
+            ";
+            _db.Execute(sql, updatedBlog);
+            return updatedBlog;
+        }
+
+        internal bool Delete(int Id)
+        {
+            string sql = "DELETE FROM blogs WHERE id = @Id LIMIT 1";
+            int removed = _db.Execute(sql, new { Id });
+            return removed == 1;
+        }
     }
 }
