@@ -1,0 +1,9 @@
+-- NOTE BLOGS
+CREATE TABLE blogs (
+    id INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    body VARCHAR(255),
+    authorId VARCHAR(255) NOT NULL,
+    isPrivate TINYINT NOT NULL,
+    PRIMARY KEY (id)
+)
