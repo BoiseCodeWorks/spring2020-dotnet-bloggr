@@ -57,6 +57,19 @@ namespace bloggr.Repositories
             return updatedBlog;
         }
 
+        internal IEnumerable<BlogTagViewModel> GetByTagId(int tagId)
+        {
+            string sql = @"
+                SELECT 
+                b.*
+                bt.id AS blogTagId
+                FROM blogtags bt
+                INNER JOIN blogs b ON b.id = bt.blogId
+                WHERE tagId = @tagId";
+            return _db.Query<BlogTagViewModel>(sql, new { tagId });
+
+        }
+
         internal bool Delete(int Id)
         {
             string sql = "DELETE FROM blogs WHERE id = @Id LIMIT 1";

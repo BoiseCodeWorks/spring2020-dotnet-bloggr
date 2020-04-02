@@ -50,6 +50,12 @@ namespace bloggr.Services
             return _repo.Edit(found);
         }
 
+        // TODO write this later
+        internal IEnumerable<BlogTagViewModel> GetBlogsByTagId(int tagId)
+        {
+            return _repo.GetByTagId(tagId);
+        }
+
         internal Blog Delete(int id, string userId)
         {
             Blog found = Get(id);

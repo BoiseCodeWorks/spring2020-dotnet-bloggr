@@ -13,9 +13,11 @@ namespace bloggr.Controllers
     public class BlogsController : ControllerBase
     {
         private readonly BlogsService _bs;
-        public BlogsController(BlogsService bs)
+        private readonly CommentsService _cs;
+        public BlogsController(BlogsService bs, CommentsService cs)
         {
             _bs = bs;
+            _cs = cs;
         }
 
         [HttpGet]
@@ -67,6 +69,20 @@ namespace bloggr.Controllers
                     return Unauthorized("You do not have acces to this blog");
                 }
                 return Ok(blog);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        // TODO: api/blogs/:blogId/comments
+        [HttpGet("{id}/comments")]
+        public ActionResult<IEnumerable<Comment>> GetCommentsByBlogId(int id)
+        {
+            try
+            {
+                return Ok(_cs.GetByBlogId(id));
             }
             catch (Exception e)
             {

@@ -63,6 +63,10 @@ namespace bloggr
             //REGISTER TRANSIENTS
             services.AddTransient<BlogsService>();
             services.AddTransient<BlogsRepository>();
+            services.AddTransient<CommentsService>();
+            services.AddTransient<CommentsRepository>();
+            services.AddTransient<TagsService>();
+            services.AddTransient<TagsRepository>();
 
 
         }
