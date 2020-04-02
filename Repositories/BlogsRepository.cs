@@ -57,16 +57,16 @@ namespace bloggr.Repositories
             return updatedBlog;
         }
 
-        internal IEnumerable<BlogTagViewModel> GetByTagId(int tagId)
+        internal IEnumerable<BlogTagViewModel> GetByTagId(int TagId)
         {
             string sql = @"
                 SELECT 
-                b.*
+                b.*,
                 bt.id AS blogTagId
                 FROM blogtags bt
                 INNER JOIN blogs b ON b.id = bt.blogId
-                WHERE tagId = @tagId";
-            return _db.Query<BlogTagViewModel>(sql, new { tagId });
+                WHERE tagId = @TagId AND isPrivate = 0";
+            return _db.Query<BlogTagViewModel>(sql, new { TagId });
 
         }
 

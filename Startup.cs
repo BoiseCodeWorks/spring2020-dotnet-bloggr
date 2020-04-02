@@ -67,6 +67,8 @@ namespace bloggr
             services.AddTransient<CommentsRepository>();
             services.AddTransient<TagsService>();
             services.AddTransient<TagsRepository>();
+            services.AddTransient<BlogTagsService>();
+            services.AddTransient<BlogTagsRepository>();
 
 
         }

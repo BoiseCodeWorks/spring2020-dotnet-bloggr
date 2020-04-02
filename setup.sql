@@ -24,4 +24,28 @@ USE bloggr;
 --         ON DELETE CASCADE
 -- )
 
+-- -- NOTE Tags
+-- CREATE TABLE tags (
+--     id INT NOT NULL AUTO_INCREMENT,
+--     name VARCHAR(255) NOT NULL,
+--     PRIMARY KEY (id)
+-- );
 
+-- -- NOTE blogTags
+-- CREATE TABLE blogtags (
+--     id INT NOT NULL AUTO_INCREMENT,
+--     blogId INT NOT NULL,
+--     tagId INT NOT NULL,
+--     authorId VARCHAR(255) NOT NULL,
+--     PRIMARY KEY (id),
+
+--     INDEX (blogId),
+
+--     FOREIGN KEY (blogId)
+--         REFERENCES blogs(id)
+--         ON DELETE CASCADE,
+
+--     FOREIGN KEY (tagId)
+--         REFERENCES tags(id)
+--         ON DELETE CASCADE
+-- );
