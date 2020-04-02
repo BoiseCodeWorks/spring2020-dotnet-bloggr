@@ -29,6 +29,7 @@ namespace bloggr.Services
 
         internal Blog Get(int id)
         {
+            //NOTE If you do not null check you could get a 204 (No Context) if the blog was not found
             Blog found = _repo.Get(id);
             if (found == null)
             {

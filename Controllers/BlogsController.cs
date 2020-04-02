@@ -31,7 +31,7 @@ namespace bloggr.Controllers
             }
         }
 
-        [HttpGet("user")]
+        [HttpGet("myBlogs")]  // api/blogs/myblogs
         [Authorize]
         public ActionResult<IEnumerable<Blog>> GetUserBlogs()
         {

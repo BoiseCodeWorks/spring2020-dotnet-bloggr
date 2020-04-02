@@ -32,10 +32,10 @@ namespace bloggr.Repositories
             return newBlog;
         }
 
-        internal Blog Get(int Id)
+        internal Blog Get(int id)
         {
             string sql = "SELECT * FROM blogs WHERE id = @Id";
-            return _db.QueryFirstOrDefault<Blog>(sql, new { Id });
+            return _db.QueryFirstOrDefault<Blog>(sql, new { Id = id });
         }
 
         internal IEnumerable<Blog> GetUserBlogs(string UserId)
